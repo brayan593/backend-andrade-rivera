@@ -13,7 +13,20 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('projects',function (){
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    return ['proyecto1','proyecto2'];
+
+ });
+
+Route::post('projects',function (){
+   return ['proyecto1','proyecto2'];
 });
+
+Route::put('projects',function (){
+    return ['proyecto1','proyecto2'];
+ });
+
+ Route::delete('projects',function (){
+    return ['proyecto1','proyecto2'];
+ });
