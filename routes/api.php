@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('projects',function (){
+    return ['proyecto1','proyecto2'];
+ });
+ Route::get('projects/{project}',function (){
+    return 'proyecto1';
+ });
+ Route::put('projects/{project}',function (){
+    return 'actualizado';
+ });
+ Route::delete('projects/{project}',function (){
+    return 'eliminado';
+ });
+ Route::post('projects',function (){
+    return 'guardado';
+ });
