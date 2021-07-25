@@ -13,20 +13,19 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::get('projects',function (){
-
-    return ['proyecto1','proyecto2'];
-
- });
-
-Route::post('projects',function (){
-   return ['proyecto1','proyecto2'];
-});
-
-Route::put('projects',function (){
     return ['proyecto1','proyecto2'];
  });
-
- Route::delete('projects',function (){
-    return ['proyecto1','proyecto2'];
+ Route::get('projects/{project}',function (){
+    return 'proyecto1';
+ });
+ Route::put('projects/{project}',function (){
+    return 'actualizado';
+ });
+ Route::delete('projects/{project}',function (){
+    return 'eliminado';
+ });
+ Route::post('projects',function (){
+    return 'guardado';
  });
