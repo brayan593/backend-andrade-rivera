@@ -29,3 +29,21 @@ Route::get('projects',function (){
  Route::post('projects',function (){
     return 'guardado';
  });
+
+
+
+ Route::get('offices/{office}/employees',function (){
+    return ['ofice1, Pao','ofice2, Pancho'];
+ });
+ Route::get('offices/{office}/employees/{employee}',function (){
+    return 'ofice1, Pao';
+ });
+ Route::put('offices/{office}/employees/{employee}',function (){
+    return 'actualizado';
+ });
+ Route::delete('offices/{office}/employees/{employee}',function (){
+    return 'eliminado';
+ });
+ Route::post('offices/{office}/employees',function (){
+    return 'guardado';
+ });
