@@ -31,3 +31,20 @@ Route::get('projects',function (){
  Route::post('projects',function (){
     return ['proyecto1'];
  });
+
+
+ Route::get('patrullas/{patrulla}/oficiales',function (){
+   return ['oficial1, Michael','oficial2, Pancho'];
+});
+Route::get('patrullas/{patrulla}/oficiales/{oficial}',function (){
+   return 'oficial1, Michael';
+});
+Route::put('patrullas/{patrulla}/oficiales/{oficial}',function (){
+   return 'actualizado';
+});
+Route::delete('patrullas/{patrulla}/oficiales/{oficial}',function (){
+   return 'eliminado';
+});
+Route::post('patrullas/{patrulla}/oficiales',function (){
+   return 'guardado';
+});
