@@ -34,20 +34,18 @@ Route::prefix('project')->group(function () {
     });
 }); 
 
-Route::apiResource('offices/{office}/employees',OfficesEmployeesController::class);
+ Route::apiResource('offices.employees',OfficesEmployeesController::class);
 
-Route::apiResource('office/{office}/employee',OfficesEmployeesController::class);
-
+/*
 Route::prefix('office/{office}/employee/{employee}')->group(function () {
    Route::patch('state',[OfficesEmployeesController::class,'updateState']);
-});
+}); */
 
-
-
-Route::apiResource('patrols/{patrol}/cops',PatrolsPolicemanController::class);
-
-Route::apiResource('patrol/{patrol}/policeman',PatrolsPolicemanController::class);
-
-Route::prefix('patrol/{patrol}/policeman/{policeman}')->group(function () {
-   Route::patch('state',[PatrolsPolicemanController::class,'updateState']);
-});
+Route::prefix('office/{office}/employees')->group(function () {
+    Route::prefix('{employee}')->group(function () {
+        Route::patch('state',[OfficesEmployeesController::class,'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state',[OfficesEmployeesController::class,'updateState']);
+    });
+}); 
