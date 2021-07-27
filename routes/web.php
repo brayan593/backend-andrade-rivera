@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PatrolsPolicemanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,38 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('projects',function (){
-    return ['proyecto1','proyecto2'];
- });
- Route::get('projects',function (){
-    return ['proyecto1'];
- });
- Route::put('projects',function (){
-    return ['proyecto1'];
- });
- Route::delete('projects',function (){
-    return ['proyecto1'];
- });
- Route::post('projects',function (){
-    return ['proyecto1'];
- });
+Route::apiResource('projects',ProjectsController::class);
 
+Route::prefix('project')->group(function () {
+    Route::prefix('{project}')->group(function () {
+        Route::patch('state',[ProjectsController::class,'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state',[ProjectsController::class,'updateState']);
+    });
+}); 
 
- Route::get('patrullas/{patrulla}/oficiales',function (){
-   return ['oficial1, Michael','oficial2, Pancho'];
-});
-Route::get('patrullas/{patrulla}/oficiales/{oficial}',function (){
-   return 'oficial1, Michael';
-});
-Route::put('patrullas/{patrulla}/oficiales/{oficial}',function (){
-   return 'actualizado';
-});
-Route::delete('patrullas/{patrulla}/oficiales/{oficial}',function (){
-   return 'eliminado';
-});
-Route::post('patrullas/{patrulla}/oficiales',function (){
-   return 'guardado';
+Route::apiResource('patrols/{patrol}/cops',PatrolsPolicemanController::class);
+
+Route::apiResource('patrol/{patrol}/policeman',PatrolsPolicemanController::class);
+
+Route::prefix('patrol/{patrol}/policeman/{policeman}')->group(function () {
+   Route::patch('state',[PatrolsPolicemanController::class,'updateState']);
 });
