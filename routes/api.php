@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\OfficesEmployeesController;
-
+use App\Http\Controllers\PatrolsPolicemanController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,4 +40,14 @@ Route::apiResource('office/{office}/employee',OfficesEmployeesController::class)
 
 Route::prefix('office/{office}/employee/{employee}')->group(function () {
    Route::patch('state',[OfficesEmployeesController::class,'updateState']);
+});
+
+
+
+Route::apiResource('patrols/{patrol}/cops',PatrolsPolicemanController::class);
+
+Route::apiResource('patrol/{patrol}/policeman',PatrolsPolicemanController::class);
+
+Route::prefix('patrol/{patrol}/policeman/{policeman}')->group(function () {
+   Route::patch('state',[PatrolsPolicemanController::class,'updateState']);
 });
