@@ -5,14 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Office extends Model
 {
-<<<<<<< HEAD
-    use HasFactory;
-}
-=======
     //use HasFactory;
-    protected $table = 'projects';
+    protected $table = 'office';
     protected $fillable = [
         'code',
         'description',
@@ -29,19 +25,13 @@ protected $casts = [
 
 protected $attributes = ['full_name']
 
-/*function author(){
-    return $this->hasOne(Author::class);
-} */
 
- function authors(){
-    return $this->hasMany(Author::class);
+ function employees(){
+    return $this->hasMany(employee::class);
 } 
 
-/* function authors(){
-    return $this->belongsToMany(related:Author::class)->withTimestamps();
-} */
 
-//mutadores
+
 function setCodeAttribute($value){
     $this->attribute['code'] = strtoupper($value);
 }
@@ -50,14 +40,7 @@ function setCodeAttribute($value){
     $this->attribute['date'] = 'hola';
 }
 
-//accesors
 function getFullNameAttribute(){
     return  $this->attribute['code'].$this->attribute['description'];
 }
-
 }
-
-
-
-
->>>>>>> 3d23b54921cd21d3f520c757593b694f2d91d815
