@@ -36,8 +36,8 @@ Route::prefix('project')->group(function () {
 
 Route::apiResource('offices/{office}/employees',OfficesEmployeesController::class);
 
-Route::apiResource('office/{office}/employee',ProjectsController::class);
+Route::apiResource('office/{office}/employee',OfficesEmployeesController::class);
 
 Route::prefix('office/{office}/employee/{employee}')->group(function () {
-   Route::patch('state',[ProjectsController::class,'updateState']);
+   Route::patch('state',[OfficesEmployeesController::class,'updateState']);
 });
