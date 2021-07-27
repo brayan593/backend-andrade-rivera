@@ -25,9 +25,7 @@ Route::prefix('project')->group(function () {
     });
 }); 
 
-Route::apiResource('patrols/{patrol}/cops',PatrolsPolicemanController::class);
-
-Route::apiResource('patrol/{patrol}/policeman',PatrolsPolicemanController::class);
+Route::apiResource('patrols.cops',PatrolsPolicemanController::class);
 
 Route::prefix('patrol/{patrol}/policeman/{policeman}')->group(function () {
    Route::patch('state',[PatrolsPolicemanController::class,'updateState']);
