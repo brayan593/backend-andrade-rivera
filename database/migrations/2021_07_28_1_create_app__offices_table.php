@@ -23,9 +23,6 @@ class CreateAppOfficesTable extends Migration
             ->nullable()
             ->comment('my coment');
 
-            $table->boolean('approved')
-            ->(true)
-            ->comment('my coment');
 
             $table->string('title')
             ->comment('my coment');
@@ -42,6 +39,6 @@ class CreateAppOfficesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offices');
+        Schema::connection(env('DB_CONNECTION_APP'))->dropIfExists('offices');
     }
 }

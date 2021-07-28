@@ -17,7 +17,7 @@ class CreateAppEmployeesTable extends Migration
     {
         Schema::connection(env('DB_CONNECTION_APP'))->create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreingId('office_id')->constrained('app.projects');
+            $table->foreignId('office_id')->constrained('app.offices');
             $table->string('email');
             $table->string('identification');
             $table->integer('age')
