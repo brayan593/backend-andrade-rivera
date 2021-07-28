@@ -18,11 +18,11 @@ class CreateAppOfficesTable extends Migration
 
             $table->date('date')
             ->comment('my coment');
+            
 
             $table->text('description')
             ->nullable()
             ->comment('my coment');
-
 
             $table->string('title')
             ->comment('my coment');
