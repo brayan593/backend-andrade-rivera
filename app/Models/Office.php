@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    //use HasFactory;
+    use HasFactory;
     protected $table = 'office';
     protected $fillable = [
         'code',
@@ -23,7 +23,7 @@ protected $casts = [
 
 ];
 
-protected $attributes = ['full_name'];
+//protected $attributes = ['full_name'];
 
 
  function employees(){

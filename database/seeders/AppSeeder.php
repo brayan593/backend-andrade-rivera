@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Office;
 
 class AppSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class AppSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Office::factory(10)->create();
     }
 }

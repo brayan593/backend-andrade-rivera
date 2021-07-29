@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Employee extends Model
 {
-    //use HasFactory;
+    use HasFactory;
     protected $table = 'employee';
     protected $fillable = [
         'age',
@@ -21,13 +21,13 @@ class Employee extends Model
 
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
     ];
 
  
 
 function office(){
-    return $this->belongsTo(related:Office::class);
+    return $this->belongsTo(Office::class);
 } 
 
 

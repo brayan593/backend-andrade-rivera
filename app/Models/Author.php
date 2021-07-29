@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Author extends Model
 {
-    //use HasFactory;
+    use HasFactory;
     protected $table = 'authors';
     protected $fillable = [
         'name',
