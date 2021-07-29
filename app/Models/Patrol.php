@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Hash;
 class Patrol extends Model
 {
 
-  //use HasFactory;
-  protected $table = 'patrol';
+  use HasFactory;
+  protected $table = 'app.patrol';
   protected $fillable = [
       'number patrol',
       'type of patrol',
