@@ -23,7 +23,7 @@ protected $casts = [
 
 ];
 
-protected $attributes = ['full_name']
+protected $attributes = ['full_name'];
 
 
  function employees(){
@@ -36,7 +36,7 @@ function setCodeAttribute($value){
     $this->attribute['code'] = strtoupper($value);
 }
 
-function setCodeAttribute($value){
+function setDateAttribute($value){
     $this->attribute['date'] = 'hola';
 }
 
