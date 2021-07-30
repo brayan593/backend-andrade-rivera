@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OfficesEmployeesController extends Controller
 {
@@ -13,7 +14,15 @@ class OfficesEmployeesController extends Controller
      */
     public function index()
     {
-        $employees = ['ofice1, Pao','ofice2, Pancho'];
+        // SQL
+        // $projects = DB::select('select * from app.projects');
+
+        // QUERY BUILDER
+        // $projects = DB::table('app.projects')->get();
+
+        // ELOQUENT
+        $employees = Employee::get();
+       // $employees BB::select('select * from app.employees')
         return response()->json(
            ['data'=> $employees,
            'msg'=>['sumary'=> 'consulta correcta',
@@ -29,6 +38,33 @@ class OfficesEmployeesController extends Controller
      */
     public function store(Request $request)
     {
+    //sql
+  /*       BD::insert('insert into app.employees (
+            age,
+            name,
+            email,
+            ponhe,
+            identification, 
+            created_at, 
+            update_at)
+            values (?,?,?,?,?,?)', [
+                $request->age,
+                $request->name,
+                $request->email,
+                $request->ponhe,
+                $request->identification,
+                $request->created_at,
+                $request->update_at,
+            ]); */
+
+        $employee = new Employee();
+        $employee->age = $request->age;
+        $employee->name = $request->name;
+        $employee->email = $request->email;
+        $employee->ponhe = $request->approved;
+        $employee->identification = $request->identification;
+        $employee->save();
+
         return response()->json(
             ['data'=> null,
             'msg' => [
@@ -44,11 +80,20 @@ class OfficesEmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($employee)
     {
-        $employee = 'ofice1, Pao';
+        // SQL
+        // $projects = DB::select('select * from app.projects where id = ?', [$project]);
+
+        // QUERY BUILDER
+        // $project = DB::table('app.projects')->where('id', '=', $project)->first();
+        $employee = DB::table('app.employees')->find($employee);
+
+        // ELOQUENT
+        //$employee = Employee::find($employee);
+       // $employee = DB::('select * from app.employees where id = ?',[$employee]);
         return response()->json(
-           ['data'=> $employee,
+           ['data'=> $employee[0],
            'msg'=>['sumary'=> 'consulta correcta',
            'detail'=>'la consulta esta correcta', 
            'code'=>'200']], 200
@@ -64,6 +109,14 @@ class OfficesEmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $employee = Employee::find($employee);
+        $employee->age = $request->age;
+        $employee->name = $request->name;
+        $employee->email = $request->email;
+        $employee->ponhe = $request->approved;
+        $employee->identification = $request->identification;
+        $employee->save();
+
         return response()->json(
            [  'data' => null,
            'msg' => [
@@ -79,10 +132,12 @@ class OfficesEmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($employee)
     {
+        $employee = Employee::find($employee);
+        $employee -> delete();
         return response()->json(
-            ['data'=> null,
+            [
             'msg' => [
             'summary' => 'Eliminado correctamente',
             'detail' => 'EL empleado se eliminó correctamente',
@@ -90,8 +145,9 @@ class OfficesEmployeesController extends Controller
          );
     }
 
-    public function updateState()
+    public function updateState($employee)
     {
+ 
         return response()->json(
             ['data'=> null,
             'msg' => [

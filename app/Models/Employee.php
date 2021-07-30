@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class Employee extends Model
 {
     use HasFactory;
-    protected $table = 'employee';
+    protected $table = 'app.employees';
     protected $fillable = [
         'age',
         'name',
@@ -24,15 +24,17 @@ class Employee extends Model
         'remember_token'
     ];
 
- 
-
-function office(){
-    return $this->belongsTo(Office::class);
-} 
 
 
+    function office()
+    {
+        return $this->belongsTo(Office::class);
+    }
 
-function setPasswordAttribute($value){
-    $this->attributes['password'] = Hash::make($value); 
-}
+
+
+    function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }

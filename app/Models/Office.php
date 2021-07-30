@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Office extends Model
 {
     use HasFactory;
-    protected $table = 'office';
+    protected $table = 'app.offices';
     protected $fillable = [
         'code',
         'description',
