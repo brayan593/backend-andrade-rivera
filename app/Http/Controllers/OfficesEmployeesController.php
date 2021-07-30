@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class OfficesEmployeesController extends Controller
 {
@@ -59,9 +61,7 @@ class OfficesEmployeesController extends Controller
 
         $employee = new Employee();
         $employee->age = $request->age;
-        $employee->name = $request->name;
         $employee->email = $request->email;
-        $employee->ponhe = $request->approved;
         $employee->identification = $request->identification;
         $employee->save();
 
@@ -107,13 +107,11 @@ class OfficesEmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $employee)
     {
         $employee = Employee::find($employee);
         $employee->age = $request->age;
-        $employee->name = $request->name;
         $employee->email = $request->email;
-        $employee->ponhe = $request->approved;
         $employee->identification = $request->identification;
         $employee->save();
 
