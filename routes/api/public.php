@@ -1,51 +1,65 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\OfficesEmployeesController;
-use App\Http\Controllers\PatrolsPolicemanController;
+use App\Http\Controllers\TeamsPlayersController;
+use App\Http\Controllers\ProjectAuthorController;
+use App\Http\Controllers\AuthorsController;
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
+| Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| contains the "web" middleware group. Now create something great!
 |
 */
-//para una sola forma
-/* Route::apiResource('projects',ProjectsController::class);
 
-Route::prefix('project/{project}')->group(function () {
-   Route::patch('state',[ProjectsController::class,'updateState']);
-}); */
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+//PROJECTS
+Route::apiResource('projects', ProjectsController::class);
+/* Estas lineas de codigo hacen lo mismo que las lineas de abajo */
+// Route::prefix('project/{project}')->group(function () {
+//     Route::patch('state',[ProjectsController::class,'updateState']);
+// });
 
-//para las dos formas
- Route::apiResource('projects',ProjectsController::class);
+// Route::prefix('project/{project}')->group(function () {
+//     Route::patch('{}/state',[ProjectsController::class,'updateState']);
+// });
 
 Route::prefix('project')->group(function () {
     Route::prefix('{project}')->group(function () {
-        Route::patch('state',[ProjectsController::class,'updateState']);
+        Route::patch('state', [ProjectsController::class, 'updateState']);
     });
     Route::prefix('')->group(function () {
-        Route::patch('state',[ProjectsController::class,'updateState']);
+        Route::patch('state', [ProjectsController::class, 'updateState']);
     });
-}); 
+});
+//PROJECTS-AUTHORS
+Route::apiResource('projects.authors', ProjectAuthorController::class);
 
- Route::apiResource('offices.employees',OfficesEmployeesController::class);
-
-/*
-Route::prefix('office/{office}/employee/{employee}')->group(function () {
-   Route::patch('state',[OfficesEmployeesController::class,'updateState']);
-}); */
-
-Route::prefix('office/{office}/employees')->group(function () {
-    Route::prefix('{employee}')->group(function () {
-        Route::patch('state',[OfficesEmployeesController::class,'updateState']);
+Route::prefix('project/{project}/authors')->group(function () {
+    Route::prefix('{author}')->group(function () {
+        Route::patch('state', [ProjectAuthorController::class, 'updateState']);
     });
     Route::prefix('')->group(function () {
-        Route::patch('state',[OfficesEmployeesController::class,'updateState']);
+        Route::patch('state', [ProjectAuthorController::class, 'updateState']);
     });
-}); 
+});
+
+//TEAMS-PLAYERS
+Route::apiResource('teams/{team}/players', TeamsPlayersController::class);
+// Route::apiResource('teams.players', TeamsPlayersController::class);
+
+Route::prefix('teams/{team}/player')->group(function () {
+    Route::prefix('{player}')->group(function () {
+        Route::patch('state', [TeamsPlayersController::class, 'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state', [TeamsPlayersController::class, 'updateState']);
+    });
+});

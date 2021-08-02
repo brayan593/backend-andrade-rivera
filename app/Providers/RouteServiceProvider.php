@@ -26,7 +26,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    //protected $namespace = 'App\\Http\\Controllers';
+    //para no importar cada controlador en api.php
+    // protected $namespace = 'App\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -38,15 +39,29 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-
-        $this->mapApiRoutes();
+            $this->mapApiRoutes();
 
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
     }
+    protected function mapApiRoutes()
+    {
+        $version = 'v1';
+        Route::prefix('api/' . $version . '/public')
+            ->middleware('api')
+            ->group(base_path('routes/api/public.php'));
 
+        Route::prefix('api/' . $version . '/private')
+            ->middleware('api')
+            ->group(base_path('routes/api/private.php'));
+
+        Route::prefix('api/' . $version . '/authentication')
+            ->middleware('api')
+            ->group(base_path('routes/api/authentication.php'));
+    }
+    
     /**
      * Configure the rate limiters for the application.
      *
@@ -58,22 +73,4 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
-
-   
-        protected function mapApiRoutes()
-        {
-            $version = 'v1';
-            Route::prefix('api/' . $version.'/public')
-                ->middleware('api')
-                ->group(base_path('routes/api/public.php'));
-    
-            Route::prefix('api/' . $version.'/private')
-                ->middleware('api')
-                ->group(base_path('routes/api/private.php'));
-    
-            Route::prefix('api/' . $version.'/authentication')
-                ->middleware('api')
-                ->group(base_path('routes/api/authentication.php'));
-        }
-    
 }

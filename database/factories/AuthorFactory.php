@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Employee;
+use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EmployeeFactory extends Factory
+class AuthorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Employee::class;
+    protected $model = Author::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,11 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'age' => $this->faker->text(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => $this->faker->email(),
+            'identification' => $this->faker->uuid(),
+            'names' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
-            'identification' => $this->faker->text(),
+            'age' => $this->faker->numberBetween(18, 50)
         ];
     }
 }

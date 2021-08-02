@@ -4,38 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
 class Author extends Model
 {
     use HasFactory;
-    protected $table = 'authors';
+    protected $table = 'app.authors';
     protected $fillable = [
-        'name',
         'email',
-        'identification'
+        'identification',
+        'names',
+        'phone',
+        'age'
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-  /*   function proyect(){
-        return $this->belongsTo(related:Project::class)
+    //un autor tiene un solo proyecto
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
- */
 
-function proyect(){
-    return $this->belongsTo(related:Project::class);
-} 
-
-/*  function proyects(){
-    return $this->belongsToMany(related:Project::class)->withTimestamps();
-}  */
-
-function setPasswordAttribute($value){
-    $this->attributes['password'] = Hash::make($value); 
-}
+    //muchos a muchos
+    // public function projects()
+    // {
+    //     return $this->belongsToMany(Project::class);
+    // }
 }
