@@ -8,9 +8,7 @@
 </head>
 <body>
     <div style="display: flex; justify-content:center">
-        <h3>Bryan Perez</h3>
-        <h2>Mi vista</h2>
-        <p>20/7/2021</p>
+        <h3>weon</h3>
     </div>
 </body>
 </html>

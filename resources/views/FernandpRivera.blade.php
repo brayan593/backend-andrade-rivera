@@ -8,9 +8,8 @@
 </head>
 <body>
     <div style="display: flex; justify-content:center">
-        <h3>Joel Valencia</h3>
-        <h2>Vista REX</h2>
-        <p>20/7/2021</p>
+        <h3>Fernando Rivera</h3>
+
     </div>
 </body>
 </html>

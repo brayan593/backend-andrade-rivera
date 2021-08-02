@@ -1,2 +1,2 @@
-<h1>Pérez</h1>
-<h1>ValenciaREX</h1>
+<h1>Fernando Rivera</h1>
+<h1>Brayan Andrade</h1>
