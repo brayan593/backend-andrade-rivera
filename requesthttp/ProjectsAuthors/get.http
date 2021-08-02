@@ -1,1 +1,1 @@
-GET http://backend-andrade-rivera.test/teams/1/players
+GET http://backend-andrade-rivera.test/public/authors
