@@ -1,1 +1,1 @@
-POST  http://backend-andrade-rivera.test/public/authors
+POST  http://backend-andrade-rivera.test/api/v1/public/authors
