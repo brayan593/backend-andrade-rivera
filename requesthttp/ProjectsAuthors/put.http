@@ -1,1 +1,1 @@
-PUT   http://backend-andrade-rivera.test/api/v1/public/authors/1
+PUT   http://backend-andrade-rivera.test/api/v1/public/projects/1/authors/1
