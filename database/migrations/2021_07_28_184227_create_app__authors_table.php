@@ -16,13 +16,13 @@ class CreateAppAuthorsTable extends Migration
         Schema::connection(env('DB_CONNECTION_APP'))
             ->create('authors', function (Blueprint $table) {
                 $table->id();
+                $table->foreignId('project_id')->constrained('app.projects');
                 $table->string('email');
                 $table->string('identification');
                 $table->string('names');
                 $table->string('phone');
                 $table->integer('age')->unsigned(); //no tiene signo ej -10 ;
                 // $table->foreignId('project_id'); esta forma estab bien ppero usaremos la de abajo
-                $table->foreignId('project_id')->constrained('app.projects');
                 $table->softDeletes(); //todas las migrations con este campo
                 $table->timestamps();
             });

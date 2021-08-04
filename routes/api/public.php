@@ -51,15 +51,3 @@ Route::prefix('project/{project}/authors')->group(function () {
     });
 });
 
-//TEAMS-PLAYERS
-Route::apiResource('teams/{team}/players', TeamsPlayersController::class);
-// Route::apiResource('teams.players', TeamsPlayersController::class);
-
-Route::prefix('teams/{team}/player')->group(function () {
-    Route::prefix('{player}')->group(function () {
-        Route::patch('state', [TeamsPlayersController::class, 'updateState']);
-    });
-    Route::prefix('')->group(function () {
-        Route::patch('state', [TeamsPlayersController::class, 'updateState']);
-    });
-});
