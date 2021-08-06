@@ -51,6 +51,7 @@ Route::prefix('project/{project}/authors')->group(function () {
     });
 });
 
+<<<<<<< HEAD:routes/api/v1/public.php
 //TEAMS-PLAYERS
 Route::apiResource('teams/{team}/players', TeamPlayerController::class);
 // Route::apiResource('teams.players', TeamsPlayersController::class);
@@ -64,3 +65,5 @@ Route::prefix('teams/{team}/player')->group(function () {
     });
 
 });
+=======
+>>>>>>> f5c1f3f0da9668b8dcd04eadf565fa63be9453cc:routes/api/public.php

@@ -20,9 +20,9 @@ class AppSeeder extends Seeder
         // Project::factory(10)->create();
 
         //forma 2
-        Project::factory(21)
+        Project::factory(10)
             // ->has(Author::factory()->count(3), 'authors')
-            ->hasAuthors(3, [
+            ->hasAuthors(1, [
                 'age' => 20
             ])
             ->create([
