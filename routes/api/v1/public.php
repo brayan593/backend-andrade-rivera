@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\TeamsPlayersController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TeamPlayerController;
 use App\Http\Controllers\ProjectAuthorController;
-use App\Http\Controllers\AuthorsController;
+use App\Http\Controllers\AuthorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +21,7 @@ use App\Http\Controllers\AuthorsController;
 //     return view('welcome');
 // });
 //PROJECTS
-Route::apiResource('projects', ProjectsController::class);
+Route::apiResource('projects', ProjectController::class);
 /* Estas lineas de codigo hacen lo mismo que las lineas de abajo */
 // Route::prefix('project/{project}')->group(function () {
 //     Route::patch('state',[ProjectsController::class,'updateState']);
@@ -33,10 +33,10 @@ Route::apiResource('projects', ProjectsController::class);
 
 Route::prefix('project')->group(function () {
     Route::prefix('{project}')->group(function () {
-        Route::patch('state', [ProjectsController::class, 'updateState']);
+        Route::patch('state', [ProjectController::class, 'updateState']);
     });
     Route::prefix('')->group(function () {
-        Route::patch('state', [ProjectsController::class, 'updateState']);
+        Route::patch('state', [ProjectController::class, 'updateState']);
     });
 });
 //PROJECTS-AUTHORS
@@ -52,14 +52,15 @@ Route::prefix('project/{project}/authors')->group(function () {
 });
 
 //TEAMS-PLAYERS
-Route::apiResource('teams/{team}/players', TeamsPlayersController::class);
+Route::apiResource('teams/{team}/players', TeamPlayerController::class);
 // Route::apiResource('teams.players', TeamsPlayersController::class);
 
 Route::prefix('teams/{team}/player')->group(function () {
     Route::prefix('{player}')->group(function () {
-        Route::patch('state', [TeamsPlayersController::class, 'updateState']);
+        Route::patch('state', [TeamPlayerController::class, 'updateState']);
     });
     Route::prefix('')->group(function () {
-        Route::patch('state', [TeamsPlayersController::class, 'updateState']);
+        Route::patch('state', [TeamPlayerController::class, 'updateState']);
     });
+
 });
