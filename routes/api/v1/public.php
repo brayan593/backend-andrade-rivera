@@ -50,20 +50,3 @@ Route::prefix('project/{project}/authors')->group(function () {
         Route::patch('state', [ProjectAuthorController::class, 'updateState']);
     });
 });
-
-<<<<<<< HEAD:routes/api/v1/public.php
-//TEAMS-PLAYERS
-Route::apiResource('teams/{team}/players', TeamPlayerController::class);
-// Route::apiResource('teams.players', TeamsPlayersController::class);
-
-Route::prefix('teams/{team}/player')->group(function () {
-    Route::prefix('{player}')->group(function () {
-        Route::patch('state', [TeamPlayerController::class, 'updateState']);
-    });
-    Route::prefix('')->group(function () {
-        Route::patch('state', [TeamPlayerController::class, 'updateState']);
-    });
-
-});
-=======
->>>>>>> f5c1f3f0da9668b8dcd04eadf565fa63be9453cc:routes/api/public.php
