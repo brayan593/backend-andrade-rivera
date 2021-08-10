@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -17,10 +16,14 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'app.users';
     protected $fillable = [
         'name',
+        'phone',
         'email',
         'password',
+        'direction',
+        'genred',
     ];
 
     /**
@@ -39,10 +42,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime: Y-m-d',
     ];
-    public function setPasswordAttribute($value)
+
+    function clients()
     {
-        $this->attributes['password'] = Hash::make($value);
+        return $this->belongsTo(Client::class);
+    }
+    function drivers()
+    {
+        return $this->belongsTo(Driver::class);
     }
 }

@@ -26,7 +26,6 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    //para no importar cada controlador en api.php
     // protected $namespace = 'App\\Http\\Controllers';
 
     /**
@@ -38,26 +37,18 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        $this->mapApiRoutes();
+
         $this->routes(function () {
             $this->mapApiRoutes();
+
 
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
     }
-    protected function mapApiRoutes()
-    {
-        $version = 'v1';
-        Route::prefix("api/${$version}")
-            ->middleware('api')
-            ->group(base_path("routes/api/${version}/public.php"));
 
-        Route::prefix("api/${$version}")
-            ->middleware('api')
-            ->group(base_path("routes/api/${version}/private.php"));
-    }
-    
     /**
      * Configure the rate limiters for the application.
      *
@@ -68,5 +59,20 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+    protected function mapApiRoutes()
+    {
+        $version = 'v1';
+        Route::prefix("api/${version}")
+            ->middleware('api')
+            ->group(base_path("routes/api/${version}/public.php"));
+
+        Route::prefix("api/${version}")
+            ->middleware('api')
+            ->group(base_path("routes/api/${version}/private.php"));
+
+        Route::prefix("api/${version}")
+            ->middleware('api')
+            ->group(base_path("routes/api/${version}/authentication.php"));
     }
 }

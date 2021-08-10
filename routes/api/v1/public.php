@@ -1,53 +1,34 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\TeamsPlayersController;
-use App\Http\Controllers\ProjectAuthorController;
-use App\Http\Controllers\AuthorsController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-//PROJECTS
-Route::apiResource('projects', ProjectsController::class);
-/* Estas lineas de codigo hacen lo mismo que las lineas de abajo */
-// Route::prefix('project/{project}')->group(function () {
-//     Route::patch('state',[ProjectsController::class,'updateState']);
-// });
+Route::get('init', function () {
 
-// Route::prefix('project/{project}')->group(function () {
-//     Route::patch('{}/state',[ProjectsController::class,'updateState']);
-// });
+    if (env('APP_ENV') != 'local') {
+        return response()->json('El sistema se encuentra en producción.', 500);
+    }
 
-Route::prefix('project')->group(function () {
-    Route::prefix('{project}')->group(function () {
-        Route::patch('state', [ProjectsController::class, 'updateState']);
-    });
-    Route::prefix('')->group(function () {
-        Route::patch('state', [ProjectsController::class, 'updateState']);
-    });
+    DB::select('drop schema if exists public cascade;');
+    DB::select('drop schema if exists authentication cascade;');
+    DB::select('drop schema if exists app cascade;');
+
+    DB::select('create schema authentication;');
+    DB::select('create schema app;');
+
+
+    Artisan::call('migrate', ['--seed' => true]);
+
+    return response()->json([
+        'msg' => [
+            'Los esquemas fueron creados correctamente.',
+            'Las migraciones fueron creadas correctamente',
+            'Cliente para la aplicación creado correctamente',
+        ]
+    ]);
 });
-//PROJECTS-AUTHORS
-Route::apiResource('projects.authors', ProjectAuthorController::class);
 
-Route::prefix('project/{project}/authors')->group(function () {
-    Route::prefix('{author}')->group(function () {
-        Route::patch('state', [ProjectAuthorController::class, 'updateState']);
-    });
-    Route::prefix('')->group(function () {
-        Route::patch('state', [ProjectAuthorController::class, 'updateState']);
-    });
-});
 

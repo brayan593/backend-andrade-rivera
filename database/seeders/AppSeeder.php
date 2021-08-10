@@ -2,10 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
+use App\Models\Driver;
+use App\Models\Payment;
+use App\Models\Product;
+use App\Models\Role;
+use App\Models\Seller;
+use App\Models\Shop;
+use App\Models\Travel;
+use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Database\Seeder;
-use App\Models\Project;
-use App\Models\Author;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class AppSeeder extends Seeder
 {
@@ -16,34 +23,19 @@ class AppSeeder extends Seeder
      */
     public function run()
     {
-        //forma 1
-        // Project::factory(10)->create();
-
-        //forma 2
-        Project::factory(10)
-            // ->has(Author::factory()->count(3), 'authors')
-            ->hasAuthors(1, [
-                'age' => 20
-            ])
-            ->create([
-                'approved' => true
-            ]);
-
-        //forma 3
-        // $projects = Project::factory(10)->create();
-        // Project::factory(10)->create()->state(new Sequence([],[],[]))
-    }
-    function createProjectsAuthors()
-    {
-        //forma 4
-        // $projects=Project::factory(10)->create([
-        //     'tltle' => 'Hola mundo',//siempre tendra este valor, no importa si en la factory se intenta guardar algo más
-        //     'approved' => true//siempre tendra este valor, no importa si en la factory se intenta guardar algo más
-        // ]);
-
-        // foreach ($projects as $project ) {
-        //    Author::factory()
-        // }
-
+   
+        Driver::factory(10)
+            ->has(User::factory()->count(3), 'users')
+            ->has(Role::factory()->count(3), 'roles')
+            ->has(Vehicle::factory()->count(3), 'vehicle')
+            ->create();
+        Client::factory(10)
+            ->has(User::factory()->count(3), 'users')
+            ->has(Role::factory()->count(3), 'roles')
+            ->create();
+        Travel::factory(10)
+            ->has(Driver::factory()->count(3), 'drivers')
+            ->has(Payment::factory()->count(3), 'payment')
+            ->create();
     }
 }

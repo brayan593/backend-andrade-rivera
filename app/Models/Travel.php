@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Travel extends Model
 {
     use HasFactory;
-    protected $table = 'app.clients';
+    protected $table = 'app.travels';
     protected $fillable = [];
 
-
-    function users()
+    function drivers()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Driver::class);
     }
-    function roles()
+
+    function details()
     {
-        return $this->hasMany(Role::class);
+        return $this->hasMany(Detail::class);
     }
 }

@@ -1,8 +1,0 @@
-PUT http://backend-andrade-rivera.test/api/v1/public/projects/2
-{
-    "code":"proecyo a actliazar",
-    "date":"2021-09-11",
-    "description":"ajorita",
-    "approved":false,
-    "title":"projecto test"
-}

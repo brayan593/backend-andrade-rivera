@@ -62,7 +62,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        //son esquemas, eliminar public pues no se usará
+
         'pgsql-authentication' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -74,9 +74,12 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'schema' => 'authentication',
             'schema' => env('DB_SCHEMA', 'public'),
+
             'sslmode' => 'prefer',
         ],
+        
         'pgsql-app' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -88,6 +91,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'schema' => 'app',
             'schema' => env('DB_SCHEMA_APP', 'public'),
             'sslmode' => 'prefer',
         ],
