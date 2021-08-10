@@ -4,26 +4,25 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table = 'app.users';
     protected $fillable = [
         'name',
-        'phone',
         'email',
         'password',
-        'direction',
-        'genred',
     ];
 
     /**
@@ -42,15 +41,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime: Y-m-d',
+        'email_verified_at' => 'datetime',
     ];
 
-    function clients()
-    {
-        return $this->belongsTo(Client::class);
-    }
-    function drivers()
-    {
-        return $this->belongsTo(Driver::class);
+    function setPasswordAttribute($value){
+        $this->attributes['password'] = Hash::make($value);
     }
 }
