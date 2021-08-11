@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -12,6 +13,22 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
+    public function render($request, Throwable $e)
+    {
+//        return parent::render($request, $e);
+
+        if ($e instanceof ModelNotFound || $e instanceof ModelNotFoundException) {
+            return ModelNotFound::render($request);
+        }
+
+        return response()->json([
+            'msg' => [
+                'summary' => 'Error en el servidor',
+                'detail' => '',
+                'code' => '500',
+            ]
+        ], 500);
+    }
     protected $dontReport = [
         //
     ];
