@@ -15,9 +15,6 @@ class CreateAuthenticationUsersTable extends Migration
     {
         Schema::connection(env('DB_CONNECTION'))->create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('identification_type_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('sex_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('gender_id')->nullable()->constrained('authentication.catalogues');
             $table->string('avatar')->nullable()->unique();
             $table->string('username')->unique();
             $table->string('name');
