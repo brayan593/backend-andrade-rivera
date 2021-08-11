@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthenticationUsersTable extends Migration
+class CreateappUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAuthenticationUsersTable extends Migration
      */
     public function up()
     {
-        Schema::connection(env('DB_CONNECTION'))->create('users', function (Blueprint $table) {
+        Schema::connection(env('DB_CONNECTION_APP'))->create('users', function (Blueprint $table) {
             $table->id();
             $table->string('avatar')->nullable()->unique();
             $table->string('username')->unique();
@@ -37,6 +37,6 @@ class CreateAuthenticationUsersTable extends Migration
      */
     public function down()
     {
-        Schema::connection(env('DB_CONNECTION'))->dropIfExists('users');
+        Schema::connection(env('DB_CONNECTION_APP'))->dropIfExists('users');
     }
 }
