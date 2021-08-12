@@ -67,12 +67,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = new User();
-        $user->identificationType()->associate(Catalogue::find($request->input('identificationType.id')));
+   /*      $user->identificationType()->associate(Catalogue::find($request->input('identificationType.id')));
         $user->sex()->associate(Catalogue::find($request->input('sex.id')));
         $user->gender()->associate(Catalogue::find($request->input('gender.id')));
         $user->bloodType()->associate(Catalogue::find($request->input('bloodType.id')));
         $user->ethnicOrigin()->associate(Catalogue::find($request->input('ethnicOrigin.id')));
-        $user->civilStatus()->associate(Catalogue::find($request->input('civilStatus.id')));
+        $user->civilStatus()->associate(Catalogue::find($request->input('civilStatus.id'))); */
 
         $user->username = $request->input('username');
         $user->password = $request->input('password');
@@ -123,12 +123,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->identificationType()->associate(Catalogue::find($request->input('identificationType.id')));
+  /*       $user->identificationType()->associate(Catalogue::find($request->input('identificationType.id')));
         $user->sex()->associate(Catalogue::find($request->input('sex.id')));
         $user->gender()->associate(Catalogue::find($request->input('gender.id')));
         $user->bloodType()->associate(Catalogue::find($request->input('bloodType.id')));
         $user->ethnicOrigin()->associate(Catalogue::find($request->input('ethnicOrigin.id')));
-        $user->civilStatus()->associate(Catalogue::find($request->input('civilStatus.id')));
+        $user->civilStatus()->associate(Catalogue::find($request->input('civilStatus.id'))); */
 
         $user->username = $request->input('username');
         $user->name = $request->input('name');
@@ -190,13 +190,13 @@ class UserController extends Controller
         return $user->uploadImage($request);
     }
 
-    public function indexImage(IndexImageRequest $request)
+/*     public function indexImage(IndexImageRequest $request)
     {
         return (new ImageController())->index($request, User::find($request->input('id')));
-    }
+    } */
 
     // Files
-    public function indexFiles(IndexFileRequest $request, User $user)
+  /*   public function indexFiles(IndexFileRequest $request, User $user)
     {
         return $user->indexFiles($request);
     }
@@ -229,6 +229,6 @@ class UserController extends Controller
     public function destroyFiles(User $user, DestroysFileRequest $request)
     {
         return $user->destroyFiles($request);
-    }
+    } */
 }
 

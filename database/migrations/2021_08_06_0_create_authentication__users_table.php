@@ -13,14 +13,8 @@ class CreateAuthenticationUsersTable extends Migration
      */
     public function up()
     {
-        Schema::connection(env('DB_CONNECTION'))->create('users', function (Blueprint $table) {
+        Schema::connection(env('DB_CONNECTION_APP'))->create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('identification_type_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('sex_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('gender_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('ethnic_origin_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('blood_type_id')->nullable()->constrained('authentication.catalogues');
-            $table->foreignId('civil_status_id')->nullable()->constrained('authentication.catalogues');
             $table->string('avatar')->nullable()->unique();
             $table->string('username')->unique();
             $table->string('name');
@@ -44,6 +38,6 @@ class CreateAuthenticationUsersTable extends Migration
      */
     public function down()
     {
-        Schema::connection(env('DB_CONNECTION'))->dropIfExists('users');
+        Schema::connection(env('DB_CONNECTION_APP'))->dropIfExists('users');
     }
 }

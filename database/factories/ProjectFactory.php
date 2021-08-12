@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Email;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EmailFactory extends Factory
+class ProjectFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Email::class;
+    protected $model = Project::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,11 @@ class EmailFactory extends Factory
     public function definition()
     {
         return [
-            'email'=>$this->faker->safeEmail(),
-            'domain'=>$this->faker->domainName(),
-            'icon'=>$this->faker->word(),
+            'code'=>$this->faker->lexify(),
+            'date'=>$this->faker->date(),
+            'description'=>$this->faker->paragraph(),
+            'approved'=>$this->faker->randomElement([true,false]),
+            'title'=>$this->faker->word(),
         ];
     }
 }
