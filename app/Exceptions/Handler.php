@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -13,24 +14,13 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    public function render($request, Throwable $e)
-    {
-//        return parent::render($request, $e);
-
-        if ($e instanceof ModelNotFound || $e instanceof ModelNotFoundException) {
-            return ModelNotFound::render($request);
-        }
-
-        return response()->json([
-            'msg' => [
-                'summary' => 'Error en el servidor',
-                'detail' => '',
-                'code' => '500',
-            ]
-        ], 500);
-    }
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -54,5 +44,31 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        return parent::render($request, $e);
+        if ($e instanceof ModelNotFound || $e instanceof ExampleException) {
+            return ExampleException::render($request, $e);
+        }
+        if ($e instanceof NotFoundHttpException) {
+//            return ModelNotFound::render($request);
+            return response()->json([
+                'msg' => [
+                    'summary' => 'El registro del modelo no se encontró',
+                    'detail' => '',
+                    'code' => '500',
+                ]
+            ], 404);
+        }
+
+        return response()->json([
+            'msg' => [
+                'summary' => 'Error en el servidor',
+                'detail' => '',
+                'code' => '500',
+            ]
+        ], 500);
     }
 }
